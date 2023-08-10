@@ -1,0 +1,16 @@
+.title  {
+    user-select: none;
+}
+
+.icon {
+    cursor: pointer;
+    user-select: none;
+}
+
+.icon-light {
+    color: #000;
+}
+
+.icon-dark {
+    color: #fff;
+}

@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Navbar from './Navbar/Navbar.jsx'
+import App from './App.jsx'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "./main.css"
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Navbar />
+    <App />
   </React.StrictMode>,
 )
