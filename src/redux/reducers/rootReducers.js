@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import changeModeReducer from "./changeModeReducer";
+import themeModeReducer from "./themeModeReducer";
 
 const rootReducer = combineReducers({
-    changeModeReducer
+    themeModeReducer
 });
 
 export default rootReducer;

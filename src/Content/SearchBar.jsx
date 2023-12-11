@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import { connect } from 'react-redux'
 
-export default function SearchBar(){
-    const [mode, setMode] = useState(localStorage.getItem('mode') || 'light')
+function SearchBar(props){
+    const mode = props.mode
 
     return (
         <>
@@ -18,3 +19,11 @@ export default function SearchBar(){
         </>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        mode: state.themeModeReducer.mode
+    }
+}
+
+export default connect(mapStateToProps)(SearchBar);

@@ -4,7 +4,7 @@ const default_mode = {
     mode: 'light' 
 };
 
-const changeModeReducer = (state = default_mode, action) => {
+const themeModeReducer = (state = default_mode, action) => {
     switch (action.type) {
         case CHANGE_MODE: {
             return {
@@ -17,4 +17,4 @@ const changeModeReducer = (state = default_mode, action) => {
     }
 }
 
-export default changeModeReducer;
+export default themeModeReducer;

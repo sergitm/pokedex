@@ -1,15 +1,20 @@
+import store from '../redux/store'
 import { useState } from 'react'
 import './Navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import logo from '../assets/pokedex-logo.png'
-import store from '../redux/store'
+import { connect } from 'react-redux'
+import { changeModeAction } from '../redux/actions/changeModeAction'
 
 
-export default function Navbar(){
-    const [mode, setMode] = useState(store.getState().changeModeReducer.mode)
+function Navbar(props){
+    const mode = props.mode
+    const setMode = (mode) => {
+        props.changeModeAction(mode)
+    }
     const textMode = (mode === 'light') ? 'dark' : 'light'
-    
+
     return (
         <>
             <nav className={`navbar navbar-${mode} bg-${mode}`}>
@@ -28,3 +33,15 @@ export default function Navbar(){
         setMode(newMode)
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        mode: state.themeModeReducer.mode
+    }
+}
+
+const mapDispatchToProps = {
+    changeModeAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
