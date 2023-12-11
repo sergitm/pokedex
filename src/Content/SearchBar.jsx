@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { connect } from 'react-redux'
 
 function SearchBar(props){

@@ -1,5 +1,3 @@
-import store from '../redux/store'
-import { useState } from 'react'
 import './Navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
