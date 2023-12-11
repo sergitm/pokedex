@@ -1,7 +1,13 @@
 import { CHANGE_MODE } from "../actions/changeModeAction";
 
+const getThemeInStorage = () => {
+    return localStorage.getItem('mode');
+}
+
+const theme = getThemeInStorage();
+
 const default_mode = { 
-    mode: 'light' 
+    mode: theme || 'light' 
 };
 
 const themeModeReducer = (state = default_mode, action) => {

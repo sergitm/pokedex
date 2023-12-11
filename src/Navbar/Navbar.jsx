@@ -15,6 +15,16 @@ function Navbar(props){
     }
     const textMode = (mode === 'light') ? 'dark' : 'light'
 
+    const setThemeInStorage = (mode) => {
+        localStorage.setItem('mode', mode)
+    }
+
+    function toggleMode(){
+        const newMode = mode === 'light' ? 'dark' : 'light'
+        setMode(newMode)
+        setThemeInStorage(newMode)
+    }
+
     return (
         <>
             <nav className={`navbar navbar-${mode} bg-${mode}`}>
@@ -27,11 +37,6 @@ function Navbar(props){
             </nav>
         </>
     )
-
-    function toggleMode(){
-        const newMode = mode === 'light' ? 'dark' : 'light'
-        setMode(newMode)
-    }
 }
 
 const mapStateToProps = (state) => {
