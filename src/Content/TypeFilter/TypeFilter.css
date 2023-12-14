@@ -1,4 +1,4 @@
 .btn-type:hover {
-    transform: scale(0.9);
-    background-color: blue;
+    transition: all 0.2s ease-in-out;
+    background-color: darkgrey !important;
 }
