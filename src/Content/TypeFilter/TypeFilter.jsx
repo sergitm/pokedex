@@ -1,4 +1,4 @@
-
+import './TypeFilter.css';
 
 export default function TypeFilter(props) {
     const typeNameF = props.type.name.charAt(0).toUpperCase() + props.type.name.slice(1);
@@ -7,7 +7,7 @@ export default function TypeFilter(props) {
     return (
     <>
         <input type="radio" className="btn-check" name="types" id={props.type.name} autoComplete="off" />
-        <label className={`btn btn-outline-${props.mode === 'light' ? 'primary' : 'secondary'} text-white`} htmlFor={props.type.name} title={typeNameF}>
+        <label className={`btn btn-outline-${props.mode === 'light' ? 'dark' : 'secondary'} text-white btn-type`} htmlFor={props.type.name} title={typeNameF}>
             <img src={imgUrl} alt={typeNameF} style={{width: '100%', height: '100%', objectFit: 'contain'}}/>
         </label>
     </>);

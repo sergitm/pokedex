@@ -1,0 +1,20 @@
+
+.card-title{
+    display: none;
+    user-select: none;
+}
+
+.card:hover .card-title{
+    display: block;
+    transform: translate(0, -46px);
+}
+
+.card:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.05);
+    background-color: #838383fd !important;
+}
+
+.card {
+    cursor: pointer;
+}

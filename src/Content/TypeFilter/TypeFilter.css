@@ -1,0 +1,4 @@
+.btn-type:hover {
+    transform: scale(0.9);
+    background-color: blue;
+}

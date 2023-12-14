@@ -1,5 +1,5 @@
 import Navbar from "./Navbar/Navbar"
-import SearchBar from "./Content/SearchBar"
+import SearchBar from "./Content/SearchBar/SearchBar"
 import { Provider } from "react-redux"
 import store from "./redux/store"
 
