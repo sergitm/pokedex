@@ -5,7 +5,7 @@ function PokeCard(props) {
 
     return (
         <div className="col-3 mt-4">
-            <div className={`card bg-${props.mode === 'light' ? 'light' : 'secondary'} text-${props.mode === 'light' ? 'dark' : 'white'}`}>
+            <div className={`card bg-${props.mode === 'light' ? 'light' : 'secondary'} text-${props.mode === 'light' ? 'dark' : 'white'}`} title={pokemonNameF}>
             <img src={props.pokemon.img} className="card-img" alt="..." />
             <div className="card-img-overlay">
                 <h4 className="card-title text-center">{pokemonNameF}</h4>
