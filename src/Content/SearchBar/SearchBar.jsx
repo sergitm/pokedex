@@ -43,6 +43,10 @@ function SearchBar(props){
         xhr.send(); 
     }
 
+    const changePage = (page) => {
+        setCurrentPage(page);
+    }
+
     return (
         <>
         <div className="container mt-5">
@@ -67,7 +71,7 @@ function SearchBar(props){
                 )) : <h1 className={`text-${mode === 'light' ? 'dark' : 'white'}`}>Loading..</h1>}
             </div>
             <div className='mt-4'>
-                <Pagination mode={mode} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                <Pagination mode={mode} pages={pages} currentPage={currentPage} changePage={changePage} />
             </div>
         </div>
         </>

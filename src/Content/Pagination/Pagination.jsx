@@ -1,6 +1,4 @@
-import { current } from '@reduxjs/toolkit';
 import './Pagination.css';
-import { useState } from 'react';
 
 function Pagination(props) {
     const currentPage = props.currentPage;
@@ -22,13 +20,13 @@ function Pagination(props) {
     return (
         <nav aria-label="Page navigation">
             <ul className="pagination justify-content-center">
-                <li className="page-item"><button className={`${BUTTON_STYLE}`}>Previous</button></li>
+                <li className="page-item"><button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(currentPage - 1)}>Previous</button></li>
                 {
                     pages(maxPages, currentPage).map((page) => {
-                        return <li className={`page-item ${page === currentPage ? 'active' : ''}`} key={page}><button className={`${BUTTON_STYLE}`}>{page}</button></li>
+                        return <li className={`page-item ${page === currentPage ? 'active' : ''}`} key={page}><button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(page)}>{page}</button></li>
                     })
                 }
-                <li className="page-item"><button className={`${BUTTON_STYLE}`}>Next</button></li>
+                <li className="page-item"><button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(currentPage + 1)}>Next</button></li>
             </ul>
         </nav>
     );
