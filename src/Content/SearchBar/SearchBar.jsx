@@ -2,13 +2,23 @@ import { connect } from 'react-redux'
 import { useEffect, useState } from 'react';
 import TypeFilter from '../TypeFilter/TypeFilter';
 import PokeCard from '../PokeCard/PokeCard';
+import Pagination from '../Pagination/Pagination';
 
 function SearchBar(props){
     const [types, setTypes] = useState([]);
     const [pokemon, setPokemon] = useState([]);
+    const [pages, setPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const mode = props.mode
 
     useEffect(() => {
+        if (types.length === 0) {
+            callTypes();
+        }
+        callPokemon(currentPage);
+    },[currentPage]);
+
+    const callTypes = () => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', 'http://pokedex-backend.test/api/pokemon/types');
         xhr.onload = function () {
@@ -16,19 +26,22 @@ function SearchBar(props){
                 setTypes(JSON.parse(xhr.responseText));
             }
         };
-        xhr.send();  
-    },[])
-
-    useEffect(() => {
+        xhr.send();
+    }
+    const callPokemon = (page) => {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://pokedex-backend.test/api/pokemon/all');
+        xhr.open('GET', `http://pokedex-backend.test/api/pokemon/page/${page}`);
         xhr.onload = function () {
             if (xhr.status === 200) {
-                setPokemon(JSON.parse(xhr.responseText));
+                const data = JSON.parse(xhr.responseText);
+                setPokemon(data.results);
+                if (pages === 0) {
+                    setPages(data.pages);
+                }
             }
         };
-        xhr.send();  
-    },[])
+        xhr.send(); 
+    }
 
     return (
         <>
@@ -48,10 +61,13 @@ function SearchBar(props){
                     </div>
                 </div>
             </div>
-            <div className={`mt-4 row align-items-center p-2 bg-${mode} rounded rounded-4`}>
+            <div className={`mt-4 row align-items-center p-2 pb-4 bg-${mode} rounded rounded-4`}>
                 {pokemon.length !== 0 ? pokemon.map((pokemon) => (
                     <PokeCard pokemon={pokemon} mode={mode} key={pokemon.name} />
                 )) : <h1 className={`text-${mode === 'light' ? 'dark' : 'white'}`}>Loading..</h1>}
+            </div>
+            <div className='mt-4'>
+                <Pagination mode={mode} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </div>
         </div>
         </>
