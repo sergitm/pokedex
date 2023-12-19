@@ -1,21 +1,17 @@
 
-.card-title{
-    display: none;
+.card-footer, .card-header {
     user-select: none;
+    font-weight: bold;
 }
 
-.card:hover .card-title{
+.card:hover .card-footer{
     display: block;
-    transform: translate(0, -46px);
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: #838383fd;
 }
 
 .card:hover {
     transition: all 0.2s ease-in-out;
-    transform: scale(1.05);
-    background-color: #838383fd !important;
+    scale: 1.1;
+    background-color: #6c757d !important;
     border: 1px solid black;
 }
 

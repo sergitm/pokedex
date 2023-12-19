@@ -6,10 +6,11 @@ function PokeCard(props) {
     return (
         <div className="col-3 mt-4">
             <div className={`card bg-${props.mode === 'light' ? 'light' : 'secondary'} text-${props.mode === 'light' ? 'dark' : 'white'}`} title={pokemonNameF}>
-            <img src={props.pokemon.img} className="card-img" alt="..." />
-            <div className="card-img-overlay">
-                <h4 className="card-title text-center">{pokemonNameF}</h4>
-            </div>
+                <div className="card-header border-0 bg-transparent text-end"># {props.pokemon.pkdex_number}</div>
+                <div className="card-body">
+                    <img src={props.pokemon.img} className="card-img" alt={`${pokemonNameF} Image`} />
+                </div>
+                <div className="card-footer border-0 bg-transparent text-center">{pokemonNameF}</div>
             </div>
         </div>
     );
