@@ -67,9 +67,9 @@ function Content(props){
                 </div>
             </div>
             <div className={`mt-4 row align-items-center p-2 pb-4 bg-${mode} rounded rounded-4`}>
-                {!loading ? pokemon.map((pokemon) => (
-                    <PokeCard pokemon={pokemon} mode={mode} key={pokemon.name} />
-                )) : <h1 className={`text-${mode === 'light' ? 'dark' : 'white'}`}>Loading..</h1>}
+                {!loading ? 
+                    <PokeCard list={pokemon} mode={mode} />
+                    : <h1 className={`text-${mode === 'light' ? 'dark' : 'white'}`}>Loading..</h1>}
             </div>
             <div className='mt-4'>
                 <Pagination mode={mode} pages={pages} currentPage={currentPage} loading={loading} changePage={changePage} />
