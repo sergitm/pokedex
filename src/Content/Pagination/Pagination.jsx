@@ -20,13 +20,23 @@ function Pagination(props) {
     return (
         <nav aria-label="Page navigation">
             <ul className="pagination justify-content-center">
-                <li className="page-item"><button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(currentPage - 1)}>Previous</button></li>
+                <li className={`page-item ${(currentPage === 1 || props.loading) ? 'disabled' : ''}`}>
+                    <button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(1)}>First</button>
+                </li>
+                <li className={`page-item ${(currentPage === 1 || props.loading) ? 'disabled' : ''}`}>
+                    <button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(currentPage - 1)}>Previous</button>
+                </li>
                 {
                     pages(maxPages, currentPage).map((page) => {
-                        return <li className={`page-item ${page === currentPage ? 'active' : ''}`} key={page}><button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(page)}>{page}</button></li>
+                        return <li className={`page-item ${page === currentPage ? 'active' : ''}  ${props.loading ? 'disabled' : ''}`} key={page}><button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(page)}>{page}</button></li>
                     })
                 }
-                <li className="page-item"><button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(currentPage + 1)}>Next</button></li>
+                <li className={`page-item ${(currentPage === maxPages || props.loading) ? 'disabled' : ''}`}>
+                    <button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(currentPage + 1)}>Next</button>
+                </li>
+                <li className={`page-item ${(currentPage === maxPages || props.loading) ? 'disabled' : ''}`}>
+                    <button className={`${BUTTON_STYLE}`} onClick={() => props.changePage(maxPages)}>Last</button>
+                </li>
             </ul>
         </nav>
     );
