@@ -27,7 +27,7 @@ function Content(props){
                 </div>
             </div>
             <div className={`mt-4 row align-items-center p-2 pb-4 bg-${mode} rounded rounded-4`}>
-                    <PokeCards page={currentPage} mode={mode} setPages={setPages} setPokemonLoading={setPokemonLoading} pages={pages} />
+                <PokeCards page={currentPage} mode={mode} setPages={setPages} setPokemonLoading={setPokemonLoading} pages={pages} />
             </div>
             <div className='mt-4'>
                 <Pagination mode={mode} pages={pages} currentPage={currentPage} loading={pokemonLoading} changePage={changePage} />

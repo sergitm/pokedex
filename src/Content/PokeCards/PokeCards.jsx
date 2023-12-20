@@ -1,10 +1,12 @@
 import './PokeCards.css';
 import { useEffect, useState } from 'react';
 import PokemonCard from './PokemonCard/PokemonCard';
+import ModalPokemon from './ModalPokemon/ModalPokemon';
 
 function PokeCard(props) {
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [clickedPokemon, setClickedPokemon] = useState({});
     
     useEffect(() => {
         setLoading(true);
@@ -23,13 +25,16 @@ function PokeCard(props) {
             }
         };
         xhr.send();
-    }, []);
+    }, [props.page]);
 
     return (
         <>
         {!loading ? pokemonList.map((pokemon) => (
-            <PokemonCard pokemon={pokemon} key={pokemon.name} mode={props.mode} />
+            <PokemonCard pokemon={pokemon} key={pokemon.name} mode={props.mode} setClickedPokemon={setClickedPokemon}/>
         )): <h1 className={`text-${props.mode === 'light' ? 'dark' : 'white'}`}>Loading..</h1>}
+        {
+            Object.keys(clickedPokemon).length !== 0 && <ModalPokemon pokemon={clickedPokemon} mode={props.mode} setClickedPokemon={setClickedPokemon} />
+        }
         </>
     );
 }
