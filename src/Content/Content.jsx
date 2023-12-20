@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { useEffect, useState } from 'react';
 import TypeFilter from './TypeFilter/TypeFilter';
-import PokeCard from './PokeCard/PokeCard';
+import PokeCards from './PokeCards/PokeCards';
 import Pagination from './Pagination/Pagination';
 import SearchBar from './SearchBar/SearchBar';
 
@@ -51,7 +51,7 @@ function Content(props){
             </div>
             <div className={`mt-4 row align-items-center p-2 pb-4 bg-${mode} rounded rounded-4`}>
                 {!loading ? 
-                    <PokeCard list={pokemon} mode={mode} />
+                    <PokeCards list={pokemon} mode={mode} />
                     : <h1 className={`text-${mode === 'light' ? 'dark' : 'white'}`}>Loading..</h1>}
             </div>
             <div className='mt-4'>

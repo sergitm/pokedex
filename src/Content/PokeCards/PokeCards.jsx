@@ -1,4 +1,4 @@
-import './PokeCard.css';
+import './PokeCards.css';
 
 function PokeCard(props) {
     const CARD_STYLE = `card border border-2 bg-${props.mode === 'light' ? 'light' : 'secondary'} text-${props.mode === 'light' ? 'dark' : 'white'}`
