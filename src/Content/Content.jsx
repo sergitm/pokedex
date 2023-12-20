@@ -6,7 +6,6 @@ import Pagination from './Pagination/Pagination';
 import SearchBar from './SearchBar/SearchBar';
 
 function Content(props){
-    const [types, setTypes] = useState([]);
     const [pokemon, setPokemon] = useState([]);
     const [pages, setPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -15,22 +14,10 @@ function Content(props){
 
     useEffect(() => {
         setLoading(true);
-        if (types.length === 0) {
-            callTypes();
-        }
+
         callPokemon(currentPage);
     },[currentPage]);
 
-    const callTypes = () => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://pokedex-backend.test/api/pokemon/types');
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                setTypes(JSON.parse(xhr.responseText));
-            }
-        };
-        xhr.send();
-    }
     const callPokemon = (page) => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', `http://pokedex-backend.test/api/pokemon/page/${page}`);
@@ -59,11 +46,7 @@ function Content(props){
                     <SearchBar mode={mode} />
                 </div>
                 <div className="col-9">
-                    <div className='btn-group' role='types' aria-label='Pokemon Types radio button group'>
-                        {types.length !== 0 ? types.map((type) => (
-                            <TypeFilter type={type} mode={mode} key={type.name} />
-                        )) : <h3 className={`text-${mode === 'light' ? 'dark' : 'white'}`}>Loading..</h3>}
-                    </div>
+                    <TypeFilter mode={mode} />
                 </div>
             </div>
             <div className={`mt-4 row align-items-center p-2 pb-4 bg-${mode} rounded rounded-4`}>
