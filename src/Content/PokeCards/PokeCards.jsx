@@ -1,28 +1,35 @@
 import './PokeCards.css';
+import { useEffect, useState } from 'react';
+import PokemonCard from './PokemonCard/PokemonCard';
 
 function PokeCard(props) {
-    const CARD_STYLE = `card border border-2 bg-${props.mode === 'light' ? 'light' : 'secondary'} text-${props.mode === 'light' ? 'dark' : 'white'}`
+    const [pokemonList, setPokemonList] = useState([]);
+    const [loading, setLoading] = useState(false);
     
-    const pokemonNameF = (name) =>{
-        return name.charAt(0).toUpperCase() + name.slice(1);
-    }
+    useEffect(() => {
+        setLoading(true);
+        props.setPokemonLoading(loading);
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `http://pokedex-backend.test/api/pokemon/page/${props.page}`);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                setPokemonList(data.results);
+                if (props.pages === 0) {
+                    props.setPages(data.pages);
+                }
+                setLoading(false);
+                props.setPokemonLoading(loading);
+            }
+        };
+        xhr.send();
+    }, []);
 
-    const showPokemon = (pokemon) => {
-        console.log(pokemon);
-    }
     return (
         <>
-        {props.list.map((pokemon) => (    
-            <div className="col-3 mt-4" key={pokemon.name}>
-                <div className={CARD_STYLE} title={pokemonNameF(pokemon.name)} onClick={() => showPokemon(pokemon)}>
-                    <div className="card-header border-0 bg-transparent text-end"># {pokemon.pkdex_number}</div>
-                    <div className="card-body">
-                        <img src={pokemon.img} className="card-img" alt={`${pokemonNameF(pokemon.name)} Image`} />
-                    </div>
-                    <div className="card-footer border-0 bg-transparent text-center">{pokemonNameF(pokemon.name)}</div>
-                </div>
-            </div>
-        ))}
+        {!loading ? pokemonList.map((pokemon) => (
+            <PokemonCard pokemon={pokemon} key={pokemon.name} mode={props.mode} />
+        )): <h1 className={`text-${props.mode === 'light' ? 'dark' : 'white'}`}>Loading..</h1>}
         </>
     );
 }
