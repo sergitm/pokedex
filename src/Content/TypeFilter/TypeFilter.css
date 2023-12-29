@@ -2,3 +2,15 @@
     transition: all 0.2s ease-in-out;
     background-color: darkgrey !important;
 }
+
+li {
+    padding: 0 !important;
+}
+
+li hr {
+    margin-bottom: 10px !important;
+}
+
+.dropdown-menu {
+    padding: 20px !important;
+}
