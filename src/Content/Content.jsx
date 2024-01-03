@@ -9,6 +9,7 @@ function Content(props){
     const [pages, setPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonLoading, setPokemonLoading] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
     const mode = props.mode
 
     const changePage = (page) => {
@@ -20,14 +21,14 @@ function Content(props){
         <div className="container mt-5">
             <div className={`row align-items-center p-2 bg-${mode} rounded rounded-4`}>
                 <div className='col-3'>
-                    <SearchBar mode={mode} />
+                    <SearchBar mode={mode} setSearchQuery={setSearchQuery} />
                 </div>
                 <div className="col-9">
                     <TypeFilter mode={mode} />
                 </div>
             </div>
             <div className={`mt-4 row align-items-center p-2 pb-4 bg-${mode} rounded rounded-4`}>
-                <PokeCards page={currentPage} mode={mode} setPages={setPages} setPokemonLoading={setPokemonLoading} pages={pages} />
+                <PokeCards page={currentPage} mode={mode} setPages={setPages} setPokemonLoading={setPokemonLoading} pages={pages} searchQuery={searchQuery} />
             </div>
             <div className='mt-4'>
                 <Pagination mode={mode} pages={pages} currentPage={currentPage} loading={pokemonLoading} changePage={changePage} />

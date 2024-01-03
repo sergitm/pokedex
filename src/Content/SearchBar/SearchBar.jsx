@@ -1,10 +1,24 @@
 import "./SearchBar.css";
+import { useState } from 'react';
 
 export default function SearchBar(props) {
+    const [search, setSearch] = useState("");
+
+    const handleChange = (event) => {
+        setSearch(event.target.value);
+    }
+    const submitSearch = (event) => {
+        event.preventDefault();
+        props.setSearchQuery(search);
+        console.log(search);
+    }
+
     return (
-        <div className="input-group">
-            <input className="form-control " type="text" id="search" placeholder="Name or Pokedex #" />
-            <button className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} type="button" id="searchButton">Search</button>
-        </div>
+        <form onSubmit={submitSearch}>
+            <div className="input-group">
+                <input className="form-control " type="text" id="search" placeholder="Name or Pokedex #" value={search} onChange={handleChange} />
+                <button className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} type="submit" id="searchButton">Search</button>
+            </div>
+        </form>
     );
 }

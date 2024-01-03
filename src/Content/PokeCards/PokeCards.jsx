@@ -27,6 +27,25 @@ function PokeCard(props) {
         xhr.send();
     }, [props.page]);
 
+    useEffect(() => {
+        setLoading(true);
+        props.setPokemonLoading(loading);
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `http://pokedex-backend.test/api/pokemon/${props.searchQuery}`);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                setPokemonList(data.results);
+                if (props.pages === 0) {
+                    props.setPages(data.pages);
+                }
+                setLoading(false);
+                props.setPokemonLoading(loading);
+            }
+        };
+        xhr.send();
+    }, [props.searchQuery]);
+
     return (
         <>
         {!loading ? pokemonList.map((pokemon) => (

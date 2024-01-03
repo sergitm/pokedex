@@ -27,7 +27,7 @@ function Navbar(props){
         <>
             <nav className={`navbar navbar-${mode} bg-${mode}`}>
                 <div className="container-fluid">
-                    <a className='navbar-brand icon' href='#'><img src={logo} alt="" width="30" height="24" /></a>
+                    <a className='navbar-brand icon' href='/'><img src={logo} alt="" width="30" height="24" /></a>
                     <span className={`h1 title text-${textMode}`}>PokéDex</span>
                     <FontAwesomeIcon className={`icon-${mode} mx-5`} icon={mode === 'light' ? faMoon : faSun} 
                         onClick={() => toggleMode()} />
