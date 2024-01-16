@@ -9,8 +9,11 @@ export default function SearchBar(props) {
     }
     const submitSearch = (event) => {
         event.preventDefault();
-        props.setSearchQuery(search);
-        console.log(search);
+        if (search === "") {
+            props.changePage(1);
+        } else {
+            props.setSearchQuery(search.toLowerCase());
+        }
     }
 
     return (

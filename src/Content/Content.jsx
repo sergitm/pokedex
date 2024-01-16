@@ -21,7 +21,7 @@ function Content(props){
         <div className="container mt-5">
             <div className={`row align-items-center p-2 bg-${mode} rounded rounded-4`}>
                 <div className='col-3'>
-                    <SearchBar mode={mode} setSearchQuery={setSearchQuery} />
+                    <SearchBar mode={mode} setSearchQuery={setSearchQuery} changePage={changePage} />
                 </div>
                 <div className="col-9">
                     <TypeFilter mode={mode} />

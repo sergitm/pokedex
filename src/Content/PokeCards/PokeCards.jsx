@@ -7,12 +7,12 @@ function PokeCard(props) {
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [clickedPokemon, setClickedPokemon] = useState({});
-    
-    useEffect(() => {
+
+    const fetchPage = (page) => {
         setLoading(true);
         props.setPokemonLoading(loading);
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', `http://pokedex-backend.test/api/pokemon/page/${props.page}`);
+        xhr.open('GET', `http://pokedex-backend.test/api/pokemon/page/${page}`);
         xhr.onload = function () {
             if (xhr.status === 200) {
                 const data = JSON.parse(xhr.responseText);
@@ -25,25 +25,37 @@ function PokeCard(props) {
             }
         };
         xhr.send();
+    }
+
+    const fetchSinglePokemon = (id) => {
+        setLoading(true);
+        props.setPokemonLoading(loading);
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `http://pokedex-backend.test/api/pokemon/${id}`);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                setPokemonList(data.results);
+                if (props.pages === 0) {
+                    props.setPages(data.pages);
+                }
+                setLoading(false);
+                props.setPokemonLoading(loading);
+            }
+        };
+        xhr.send();        
+    }
+    
+    useEffect(() => {
+        fetchPage(props.page);
     }, [props.page]);
 
     useEffect(() => {
-        setLoading(true);
-        props.setPokemonLoading(loading);
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', `http://pokedex-backend.test/api/pokemon/${props.searchQuery}`);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                const data = JSON.parse(xhr.responseText);
-                setPokemonList(data.results);
-                if (props.pages === 0) {
-                    props.setPages(data.pages);
-                }
-                setLoading(false);
-                props.setPokemonLoading(loading);
-            }
-        };
-        xhr.send();
+        if (props.searchQuery !== "") {
+            fetchSinglePokemon(props.searchQuery);
+        } else {
+            fetchPage(1);
+        }
     }, [props.searchQuery]);
 
     return (
