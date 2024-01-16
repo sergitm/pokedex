@@ -35,7 +35,8 @@ function ModalPokemon(props){
                 <Modal.Body>
                     <div className='row container'>
                         <div className='col'>
-                            <img src={props.pokemon.img} alt={capitalizeFirstLetter(props.pokemon.name)} />
+                            {props.pokemon.img ? <img src={props.pokemon.img} alt={capitalizeFirstLetter(props.pokemon.name)} />:
+                            <img src="./src/assets/error.png" alt="Error loading image" />}
                         </div>
                         <div className='col'>
                             <h5 className='text-center'>Basic Info</h5>

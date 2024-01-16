@@ -12,7 +12,8 @@ function PokemonCard(props){
             <div className={CARD_STYLE} title={pokemonNameF(props.pokemon.name)} onClick={() => props.setClickedPokemon(props.pokemon)}>
                 <div className="card-header border-0 bg-transparent text-end"># {props.pokemon.pkdex_number}</div>
                 <div className="card-body">
-                    <img src={props.pokemon.img} className="card-img" alt={`${pokemonNameF(props.pokemon.name)} Image`} />
+                    {props.pokemon.img ? <img src={props.pokemon.img} className="card-img" alt={`${pokemonNameF(props.pokemon.name)} Image`} /> :
+                    <img src="./src/assets/error.png" className="card-img" alt="Error loading image" />}
                 </div>
                 <div className="card-footer border-0 bg-transparent text-center">{pokemonNameF(props.pokemon.name)}</div>
             </div>
