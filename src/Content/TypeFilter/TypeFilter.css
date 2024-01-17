@@ -14,3 +14,11 @@ li hr {
 .dropdown-menu {
     padding: 20px !important;
 }
+
+.icon-light:hover{
+    color: lightgrey;
+}
+
+.icon-dark:hover{
+    color: black;
+}
