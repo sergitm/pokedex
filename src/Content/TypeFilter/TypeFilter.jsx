@@ -90,7 +90,7 @@ export default function TypeFilter(props) {
             </div>}
     </div>
     <div className='col text-end'>
-        <button className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={() => props.setTypeFilter([clickedType1, clickedType2])}>Filter</button>
+        <button className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={() => props.setTypeFilter({type1: clickedType1, type2: clickedType2})}>Filter</button>
     </div>
     </div>);
 }
