@@ -7,14 +7,14 @@ import SearchBar from './SearchBar/SearchBar';
 
 function Content(props){
     const [pages, setPages] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState({page: 1});
     const [pokemonLoading, setPokemonLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [typeFilter, setTypeFilter] = useState({type1: "none", type2: "none"});
     const mode = props.mode
 
     const changePage = (page) => {
-        setCurrentPage(page);
+        setCurrentPage({page: page});
     }
 
     return (

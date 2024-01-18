@@ -65,9 +65,9 @@ function PokeCard(props) {
     
     useEffect(() => {
         if (props.typeFilter.type1 === "none" && props.typeFilter.type2 === "none") {
-            fetchPage(props.page);
+            fetchPage(props.page.page);
         } else {
-            fetchFilteredPokemon(props.typeFilter, props.page);
+            fetchFilteredPokemon(props.typeFilter, props.page.page);
         }
     }, [props.page]);
 
@@ -82,9 +82,9 @@ function PokeCard(props) {
     useEffect(() => {
         if(props.typeFilter.type1 === "none" && props.typeFilter.type2 === "none") return;
         if (props.typeFilter.type1 != props.typeFilter.type2) {
-            fetchFilteredPokemon(props.typeFilter, props.page);
+            fetchFilteredPokemon(props.typeFilter, props.page.page);
         } else {
-            fetchFilteredPokemon({type1: props.typeFilter.type1, type2: "none"}, props.page);
+            fetchFilteredPokemon({type1: props.typeFilter.type1, type2: "none"}, props.page.page);
         }
     }, [props.typeFilter]);
 

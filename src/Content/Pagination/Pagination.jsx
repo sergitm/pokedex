@@ -1,7 +1,7 @@
 import './Pagination.css';
 
 function Pagination(props) {
-    const currentPage = props.currentPage;
+    const currentPage = props.currentPage.page;
     const maxPages = props.pages;
     const mode = props.mode;
     const textMode = (mode === 'light') ? 'dark' : 'light';
