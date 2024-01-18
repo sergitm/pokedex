@@ -45,9 +45,30 @@ function PokeCard(props) {
         };
         xhr.send();        
     }
+
+    const fetchFilteredPokemon = (types, page) => {
+        setLoading(true);
+        props.setPokemonLoading(loading);
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `http://pokedex-backend.test/api/pokemon/type/${types.type1}/${types.type2}/page/${page}`);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                setPokemonList(data.results);
+                props.setPages(data.pages);
+                setLoading(false);
+                props.setPokemonLoading(loading);
+            }
+        };
+        xhr.send();
+    }
     
     useEffect(() => {
-        fetchPage(props.page);
+        if (props.typeFilter.type1 === "none" && props.typeFilter.type2 === "none") {
+            fetchPage(props.page);
+        } else {
+            fetchFilteredPokemon(props.typeFilter, props.page);
+        }
     }, [props.page]);
 
     useEffect(() => {
@@ -57,6 +78,15 @@ function PokeCard(props) {
             fetchPage(1);
         }
     }, [props.searchQuery]);
+
+    useEffect(() => {
+        if(props.typeFilter.type1 === "none" && props.typeFilter.type2 === "none") return;
+        if (props.typeFilter.type1 != props.typeFilter.type2) {
+            fetchFilteredPokemon(props.typeFilter, props.page);
+        } else {
+            fetchFilteredPokemon({type1: props.typeFilter.type1, type2: "none"}, props.page);
+        }
+    }, [props.typeFilter]);
 
     return (
         <>

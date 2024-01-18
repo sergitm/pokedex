@@ -8,6 +8,9 @@ function Pagination(props) {
     const BUTTON_STYLE = `page-link bg-${mode} text-${textMode} fw-bold`;
 
     const pages = (maxPages, currentPage) => {
+        if (maxPages <= 5) {
+            return new Array(maxPages).fill(1).map((_, i) => i + 1);
+        }
         if (currentPage <= 3) {
             return [1, 2, 3, 4, 5];
         } else if (currentPage >= maxPages - 2) {
