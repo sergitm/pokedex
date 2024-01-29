@@ -7,16 +7,35 @@ import { changeModeAction } from '../redux/actions/changeModeAction'
 
 
 function Navbar(props){
+    // Constant for mode
     const mode = props.mode
+    
+    /**
+     * Set the mode of the application.
+     *
+     * @param {type} mode - the mode to set
+     * @return {type} 
+     */
     const setMode = (mode) => {
         props.changeModeAction(mode)
     }
+    // Constant for text mode
     const textMode = (mode === 'light') ? 'dark' : 'light'
 
+    /**
+     * Sets the theme mode in local storage.
+     *
+     * @param {string} mode - the theme mode to be stored
+     * @return {void} 
+     */
     const setThemeInStorage = (mode) => {
         localStorage.setItem('mode', mode)
     }
 
+    
+    /**
+     * Function to toggle the mode between light and dark.
+     */
     function toggleMode(){
         const newMode = mode === 'light' ? 'dark' : 'light'
         setMode(newMode)
@@ -37,6 +56,7 @@ function Navbar(props){
     )
 }
 
+// REACT REDUX
 const mapStateToProps = (state) => {
     return {
         mode: state.themeModeReducer.mode

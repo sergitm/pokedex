@@ -6,6 +6,7 @@ import Pagination from './Pagination/Pagination';
 import SearchBar from './SearchBar/SearchBar';
 
 function Content(props){
+    // States and constants
     const [pages, setPages] = useState(0);
     const [currentPage, setCurrentPage] = useState({page: 1});
     const [pokemonLoading, setPokemonLoading] = useState(false);
@@ -13,6 +14,12 @@ function Content(props){
     const [typeFilter, setTypeFilter] = useState({type1: "none", type2: "none"});
     const mode = props.mode;
 
+    /**
+     * Change the current page to the specified page.
+     *
+     * @param {type} page - the page to change to
+     * @return {type} undefined
+     */
     const changePage = (page) => {
         setCurrentPage({page: page});
     }

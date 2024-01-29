@@ -4,16 +4,32 @@ import PokemonCard from './PokemonCard/PokemonCard';
 import ModalPokemon from './ModalPokemon/ModalPokemon';
 
 function PokeCard(props) {
+    // States
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [clickedPokemon, setClickedPokemon] = useState({});
     const [shiny, setShiny] = useState(false);
 
+
+    /**
+     * Toggles the shiny state and updates the value accordingly.
+     *
+     * @param {} 
+     * @return {}
+     */
     const switchShiny = () => {
         let isShiny = !shiny;
         setShiny(isShiny);
     }
 
+
+    /**
+     * Fetches a page of pokemon data from the backend API and updates the 
+     * component state with the retrieved data.
+     *
+     * @param {number} page - The page number to fetch
+     * @return {void} 
+     */
     const fetchPage = (page) => {
         setLoading(true);
         props.setPokemonLoading(loading);
@@ -33,6 +49,13 @@ function PokeCard(props) {
         xhr.send();
     }
 
+
+    /**
+     * Fetches a single Pokemon by its ID from the backend API.
+     *
+     * @param {number} id - The ID of the Pokemon to fetch
+     * @return {void} No return value
+     */
     const fetchSinglePokemon = (id) => {
         setLoading(true);
         props.setPokemonLoading(loading);
@@ -52,6 +75,14 @@ function PokeCard(props) {
         xhr.send();
     }
 
+    /**
+     * Fetches filtered Pokemon based on types and page number.
+     *
+     * @param {array} types - The types of Pokemon to filter by
+     * @param {number} page - The page number for paginated results
+     * @return {void} No return value
+     */
+
     const fetchFilteredPokemon = (types, page) => {
         setLoading(true);
         props.setPokemonLoading(loading);
@@ -69,6 +100,7 @@ function PokeCard(props) {
         xhr.send();
     }
 
+    // Use Effects to update Pokemon List based on given changes, such as page, search query and type filters
     useEffect(() => {
         if (props.typeFilter.type1 === "none" && props.typeFilter.type2 === "none") {
             fetchPage(props.page.page);

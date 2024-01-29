@@ -1,12 +1,14 @@
 import './Pagination.css';
 
 function Pagination(props) {
+    // Constants
     const currentPage = props.currentPage.page;
     const maxPages = props.pages;
     const mode = props.mode;
     const textMode = (mode === 'light') ? 'dark' : 'light';
     const BUTTON_STYLE = `page-link bg-${mode} text-${textMode} fw-bold`;
 
+    // Function that returns and array of displayable pages in pagination menu
     const pages = (maxPages, currentPage) => {
         if (maxPages <= 5) {
             return new Array(maxPages).fill(1).map((_, i) => i + 1);

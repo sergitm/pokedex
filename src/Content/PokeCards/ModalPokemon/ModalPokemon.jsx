@@ -5,21 +5,45 @@ import { CloseButton } from 'react-bootstrap';
 import './ModalPokemon.css';
 
 function ModalPokemon(props){
+    // State to control if modal has to open or not
     const [modalIsOpen, setIsOpen] = useState(true);
 
+    /**
+     * Closes the modal by setting isOpen to false and resetting clickedPokemon in props.
+     */
     function closeModal() {
         setIsOpen(false);
         props.setClickedPokemon({});
     }
 
+    /**
+     * Capitalizes the first letter of the input string.
+     *
+     * @param {string} name - the input string
+     * @return {string} the input string with the first letter capitalized
+     */
     function capitalizeFirstLetter(name) {
         return name.charAt(0).toUpperCase() + name.slice(1);
     }
 
+
+    /**
+     * Formats the given size.
+     *
+     * @param {number} size - the size to be formatted
+     * @return {string} the formatted size
+     */
     function formatSize(size) {
         return (parseInt(size) / 10).toFixed(1).toString().replace('.', ',');
     }
 
+
+    /**
+     * Generate the path for the image based on the type.
+     *
+     * @param {type} type - The type of the image
+     * @return {string} The path for the image
+     */
     function typeImg(type) {
         return `./src/assets/types-img/Battrio_${capitalizeFirstLetter(type)}_type.png`;
     }

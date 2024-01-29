@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 
 export default function TypeFilter(props) {
+    // States
     const [types, setTypes] = useState([]);
     const [clickedType1, setClickedType1] = useState('none');
     const [clickedType2, setClickedType2] = useState('none');
     
+    // Use Effect to fetch types from backend
     useEffect(() => {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', 'http://pokedex-backend.test/api/pokemon/types');
@@ -19,17 +21,44 @@ export default function TypeFilter(props) {
         xhr.send();
     }, []);
     
+    
+    /**
+     * Capitalizes the first letter of the input type.
+     *
+     * @param {string} type - the input type to be capitalized
+     * @return {string} the capitalized type
+     */
     const typeNameF = (type) => {
         return type.charAt(0).toUpperCase() + type.slice(1);
-    } 
+    }
+
+    
+    /**
+     * Generates an image URL based on the type.
+     *
+     * @param {type} type - the type used to generate the image URL
+     * @return {string} the generated image URL
+     */
     const imgUrl = (type) => {
         return `./src/assets/types-img/Battrio_${typeNameF(type.name)}_type.png`;
     }
 
+    /**
+     * Updates the clicked type for type1.
+     *
+     * @param {type} type - the type parameter
+     * @return {void} 
+     */
     const type1clicked = (type) => {
         setClickedType1(type.name);   
     }
 
+    /**
+     * Updates the clicked type 2 and sets it to the specified type name.
+     *
+     * @param {type} type - the type to be set as clicked type 2
+     * @return {void} 
+     */
     const type2clicked = (type) => {
         setClickedType2(type.name);
     }

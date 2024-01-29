@@ -1,8 +1,16 @@
 import './PokemonCard.css';
 
 function PokemonCard(props){
+    // Style string for card
     const CARD_STYLE = `card border border-2 border-${props.mode === 'light' ? 'dark' : 'light'} text-${props.mode === 'light' ? 'dark' : 'white'}`
 
+
+    /**
+     * Generates the background color based on the given types.
+     *
+     * @param {Array} types - An array of types
+     * @return {Object} The background color object
+     */
     const cardBackgroundColor = (types) =>{
         if (types.length === 1) {
             return {backgroundColor : convertTypeToColor(types[0].type.name)};
@@ -11,8 +19,13 @@ function PokemonCard(props){
         }        
     }
 
-    // {backgroundColor: `linear-gradient(to bottom right, ${convertTypeToColor(props.pokemon.types[0].type.name)}, ${convertTypeToColor(props.pokemon.types[1].type.name)});`}
 
+    /**
+     * Converts a Pokémon type to a corresponding color code.
+     *
+     * @param {string} type - The Pokémon type
+     * @return {string} The color code corresponding to the given type
+     */
     const convertTypeToColor = (type) =>{
         switch (type) {
             case 'normal':
@@ -55,7 +68,14 @@ function PokemonCard(props){
                 return '#FFFFFF';
         }
     }
-    
+
+
+    /**
+     * Capitalizes the first letter of the given name.
+     *
+     * @param {string} name - the name to be capitalized
+     * @return {string} the capitalized name
+     */
     const pokemonNameF = (name) =>{
         return name.charAt(0).toUpperCase() + name.slice(1);
     }
