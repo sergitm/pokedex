@@ -36,17 +36,17 @@ export default function TypeFilter(props) {
     
     return (<div className='container row'>
     <div className="dropdown col-3 text-center">
-        <button className="btn btn-dark dropdown-toggle" type="button" id="type1Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <button className={`btn ${props.mode === 'light' ? 'btn-dark' : 'btn-secondary'} dropdown-toggle`} type="button" id="type1Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
             Select Type 1
         </button>
-        <ul className="dropdown-menu" aria-labelledby="type1Dropdown">
-            <li className="dropdown-header">Type 1</li>
-            <li><hr className="dropdown-divider border-top border-secondary" /></li>
+        <ul className={`dropdown-menu ${props.mode === 'light' ? 'bg-light' : 'bg-secondary'}`} aria-labelledby="type1Dropdown">
+            <li className={ `dropdown-header text-${props.mode === 'light' ? 'secondary' : 'light'}`}>Type 1</li>
+            <li><hr className={`dropdown-divider border-top border-${props.mode === 'light' ? 'secondary' : 'light'}`} /></li>
             <div className='btn-group row' role='types1' aria-label='Pokemon Types radio button group'>
             { types.length !== 0 ? types.map((type) => (
                 <li key={type.name+"1"} className='col-3'>
                     <input type="radio" className="btn-check" name="types1" id={type.name+"1"} autoComplete="off" />
-                    <label className={`btn btn-outline-${props.mode === 'light' ? 'dark' : 'secondary'} text-white btn-type`} htmlFor={type.name+"1"} title={typeNameF(type.name)}  onClick={() => type1clicked(type)}>
+                    <label className={`btn btn-outline-${props.mode === 'light' ? 'dark' : 'light'} text-white btn-type`} htmlFor={type.name+"1"} title={typeNameF(type.name)}  onClick={() => type1clicked(type)}>
                         <img src={imgUrl(type)} alt={typeNameF(type.name)} style={{width: '100%', height: '100%', objectFit: 'contain'}}/>
                     </label>
                 </li>
@@ -55,17 +55,17 @@ export default function TypeFilter(props) {
         </ul>
     </div>
     <div className="dropdown col-3 text-center">
-        <button className="btn btn-dark dropdown-toggle" type="button" id="type2Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <button className={`btn ${props.mode === 'light' ? 'btn-dark' : 'btn-secondary'} dropdown-toggle`} type="button" id="type2Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
             Select Type 2
         </button>
-        <ul className="dropdown-menu" aria-labelledby="type2Dropdown">
-            <li className="dropdown-header">Type 2</li>
-            <li><hr className="dropdown-divider border-top border-secondary" /></li>
+        <ul className={`dropdown-menu ${props.mode === 'light' ? 'bg-light' : 'bg-secondary'}`} aria-labelledby="type2Dropdown">
+            <li className={ `dropdown-header text-${props.mode === 'light' ? 'secondary' : 'light'}`}>Type 2</li>
+            <li><hr className={`dropdown-divider border-top border-${props.mode === 'light' ? 'secondary' : 'light'}`} /></li>
             <div className='btn-group row' role='types2' aria-label='Pokemon Types radio button group'>
             { types.length !== 0 ? types.map((type) => (
                 <li key={type.name+"2"} className='col-3'>
                     <input type="radio" className="btn-check" name="types2" id={type.name+"2"} autoComplete="off" />
-                    <label className={`btn btn-outline-${props.mode === 'light' ? 'dark' : 'secondary'} text-white btn-type`} htmlFor={type.name+"2"} title={typeNameF(type.name)} onClick={() => type2clicked(type)}>
+                    <label className={`btn btn-outline-${props.mode === 'light' ? 'dark' : 'light'} text-white btn-type`} htmlFor={type.name+"2"} title={typeNameF(type.name)} onClick={() => type2clicked(type)}>
                         <img src={imgUrl(type)} alt={typeNameF(type.name)} style={{width: '100%', height: '100%', objectFit: 'contain'}}/>
                     </label>
                 </li>
