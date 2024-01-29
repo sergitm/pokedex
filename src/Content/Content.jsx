@@ -11,7 +11,7 @@ function Content(props){
     const [pokemonLoading, setPokemonLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [typeFilter, setTypeFilter] = useState({type1: "none", type2: "none"});
-    const mode = props.mode
+    const mode = props.mode;
 
     const changePage = (page) => {
         setCurrentPage({page: page});
@@ -29,7 +29,13 @@ function Content(props){
                 </div>
             </div>
             <div className={`mt-4 row align-items-center p-2 pb-4 bg-${mode} rounded rounded-4`}>
-                <PokeCards page={currentPage} mode={mode} setPages={setPages} setPokemonLoading={setPokemonLoading} pages={pages} searchQuery={searchQuery} typeFilter={typeFilter} />
+                    <PokeCards page={currentPage}
+                        mode={mode} 
+                        setPages={setPages} 
+                        setPokemonLoading={setPokemonLoading} 
+                        pages={pages} 
+                        searchQuery={searchQuery} 
+                        typeFilter={typeFilter} />
             </div>
             <div className='mt-4'>
                 <Pagination mode={mode} pages={pages} currentPage={currentPage} loading={pokemonLoading} changePage={changePage} />

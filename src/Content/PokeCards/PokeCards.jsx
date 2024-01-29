@@ -7,6 +7,12 @@ function PokeCard(props) {
     const [pokemonList, setPokemonList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [clickedPokemon, setClickedPokemon] = useState({});
+    const [shiny, setShiny] = useState(false);
+
+    const switchShiny = () => {
+        let isShiny = !shiny;
+        setShiny(isShiny);
+    }
 
     const fetchPage = (page) => {
         setLoading(true);
@@ -43,7 +49,7 @@ function PokeCard(props) {
                 props.setPokemonLoading(loading);
             }
         };
-        xhr.send();        
+        xhr.send();
     }
 
     const fetchFilteredPokemon = (types, page) => {
@@ -62,7 +68,7 @@ function PokeCard(props) {
         };
         xhr.send();
     }
-    
+
     useEffect(() => {
         if (props.typeFilter.type1 === "none" && props.typeFilter.type2 === "none") {
             fetchPage(props.page.page);
@@ -80,22 +86,26 @@ function PokeCard(props) {
     }, [props.searchQuery]);
 
     useEffect(() => {
-        if(props.typeFilter.type1 === "none" && props.typeFilter.type2 === "none") return;
+        if (props.typeFilter.type1 === "none" && props.typeFilter.type2 === "none") return;
         if (props.typeFilter.type1 != props.typeFilter.type2) {
             fetchFilteredPokemon(props.typeFilter, props.page.page);
         } else {
-            fetchFilteredPokemon({type1: props.typeFilter.type1, type2: "none"}, props.page.page);
+            fetchFilteredPokemon({ type1: props.typeFilter.type1, type2: "none" }, props.page.page);
         }
     }, [props.typeFilter]);
 
     return (
         <>
-        {!loading ? pokemonList.map((pokemon) => (
-            <PokemonCard pokemon={pokemon} key={pokemon.name} mode={props.mode} setClickedPokemon={setClickedPokemon}/>
-        )): <h1 className={`text-${props.mode === 'light' ? 'dark' : 'white'}`}>Loading..</h1>}
-        {
-            Object.keys(clickedPokemon).length !== 0 && <ModalPokemon pokemon={clickedPokemon} mode={props.mode} setClickedPokemon={setClickedPokemon} />
-        }
+            <div className="form-check form-switch mx-3 mt-3">
+                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked={shiny} onChange={() => switchShiny()} />
+                <label className={`form-check-label fw-bold text-${props.mode === 'light' ? 'dark' : 'white'}`} htmlFor="flexSwitchCheckDefault">Shiny</label>
+            </div>
+            {!loading ? pokemonList.map((pokemon) => (
+                <PokemonCard pokemon={pokemon} key={pokemon.name} mode={props.mode} setClickedPokemon={setClickedPokemon} shiny={shiny} />
+            )) : <h1 className={`text-${props.mode === 'light' ? 'dark' : 'white'}`}>Loading..</h1>}
+            {
+                Object.keys(clickedPokemon).length !== 0 && <ModalPokemon pokemon={clickedPokemon} mode={props.mode} setClickedPokemon={setClickedPokemon} />
+            }
         </>
     );
 }
